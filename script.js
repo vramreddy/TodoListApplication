@@ -2,6 +2,44 @@ let todoItemsContainer = document.getElementById("todoItemsContainer");
 let addTodoButton = document.getElementById("addTodoButton");
 let saveTodoButton = document.getElementById("saveTodoButton");
 
+let messageTimeouts = {};
+
+function showStatusMessage(elementId, message, type = "success") {
+  let messageElement = document.getElementById(elementId);
+  if (!messageElement) return;
+
+  // Clear any existing active timeout for this element
+  if (messageTimeouts[elementId]) {
+    clearTimeout(messageTimeouts[elementId]);
+  }
+
+  // Remove existing type classes
+  messageElement.classList.remove("success", "warning", "info", "show");
+
+  // Determine icon class based on type
+  let iconClass = "fa-circle-check";
+  if (type === "warning") {
+    iconClass = "fa-circle-exclamation";
+  } else if (type === "info") {
+    iconClass = "fa-circle-info";
+  }
+
+  // Set the message content with icon
+  messageElement.innerHTML = `<i class="fa-solid ${iconClass} status-icon"></i> <span>${message}</span>`;
+  messageElement.classList.add(type);
+
+  // Trigger reflow to restart transition
+  messageElement.offsetHeight;
+
+  // Add the show class
+  messageElement.classList.add("show");
+
+  // Hide the message after 3 seconds
+  messageTimeouts[elementId] = setTimeout(() => {
+    messageElement.classList.remove("show");
+  }, 3000);
+}
+
 function getTodoListFromLocalStorage() {
   let stringifiedTodoList = localStorage.getItem("todoList");
   let parsedTodoList = JSON.parse(stringifiedTodoList);
@@ -13,6 +51,7 @@ let todosCount = todoList.length;
 
 saveTodoButton.onclick = function () {
   localStorage.setItem("todoList", JSON.stringify(todoList));
+  showStatusMessage("saveMessage", "Tasks saved successfully!", "success");
 };
 
 addTodoButton.onclick = function () {
@@ -20,7 +59,7 @@ addTodoButton.onclick = function () {
   let userInputValue = userInputElement.value;
 
   if (userInputValue === "") {
-    alert("Enter Valid Text");
+    showStatusMessage("addMessage", "Please enter a valid task name!", "warning");
     return;
   }
 
@@ -35,6 +74,7 @@ addTodoButton.onclick = function () {
   todoList.push(newTodo);
   createAndAppendTodo(newTodo);
   userInputElement.value = "";
+  showStatusMessage("addMessage", "Task added successfully!", "success");
 };
 
 function onTodoStatusChange(checkboxId, labelId, todoId) {

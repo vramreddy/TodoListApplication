@@ -1,51 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Todo App</title> 
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-/>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://kit.fontawesome.com/d1c2ea8b80.js" crossorigin="anonymous"></script>
-  </head>
 
-  <body>
-    <div class="todos-bg-container">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h1 class="todos-heading">Todos Application</h1>
+<head>
+  <meta charset="UTF-8" />
+  <title>Todo App</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://kit.fontawesome.com/d1c2ea8b80.js" crossorigin="anonymous"></script>
+</head>
 
-            <h1 class="create-task-heading">
-              Create <span class="create-task-heading-subpart">Task</span>
-            </h1>
+<body>
+  <div class="todos-bg-container">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="todos-heading">Todos Application</h1>
 
-            <input
-              type="text"
-              id="todoUserInput"
-              class="todo-user-input"
-              placeholder="Enter your task here  -->"
-            />
+          <h1 class="create-task-heading">
+            Create <span class="create-task-heading-subpart">Task</span>
+          </h1>
 
-            <button class="button" id="addTodoButton">Add</button>
+          <input type="text" id="todoUserInput" class="todo-user-input" placeholder="Enter your task here  -->" />
 
-            <h1 class="todo-items-heading">
-              My <span class="todo-items-heading-subpart">Tasks</span>
-            </h1>
+          <button class="button" id="addTodoButton">Add</button>
+          <div id="addMessage" class="status-message"></div>
 
-            <ul class="todo-items-container" id="todoItemsContainer"></ul>
+          <h1 class="todo-items-heading">
+            My <span class="todo-items-heading-subpart">Tasks</span>
+          </h1>
 
-            <button class="button" id="saveTodoButton">Save</button>
-          </div>
+          <ul class="todo-items-container" id="todoItemsContainer"></ul>
+
+          <button class="button" id="saveTodoButton">Save</button>
+          <div id="saveMessage" class="status-message"></div>
         </div>
       </div>
-    </div> 
-    <script src="script.js"></script>
-  </body>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
 </html>
